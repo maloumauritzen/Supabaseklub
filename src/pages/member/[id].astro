@@ -1,0 +1,86 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Footer from "../../components/Footer.astro";
+import Header from "../../components/Header.astro";
+
+export async function getStaticPaths() {
+  const curl =
+    "https://bzgcfrgsytewjqrhsigk.supabase.co/rest/v1/Products?select=*";
+
+  const apikey =
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJ6Z2NmcmdzeXRld2pxcmhzaWdrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDQyNjgyNTUsImV4cCI6MjA1OTg0NDI1NX0.6-9nGRVUQBhhmYrnWFSNAc_istpSC-yWHMbqjhN1a5M";
+
+  const options = {
+    headers: {
+      apikey: apikey,
+    },
+  };
+  const response = await fetch(curl, options);
+  const data = await response.json();
+
+  return data.map((data) => {
+    return {
+      params: { id: data.id },
+      props: { data },
+    };
+  });
+}
+
+const { id } = Astro.params;
+const { data } = Astro.props;
+---
+
+<Layout>
+  <Header />
+  <article>
+    <h2>{data.membership}</h2>
+    <img src={"../img/" + data.image} alt={data.imagedescr} />
+    <h3>{data.name}</h3>
+    <p>{data.phone}</p>
+    <p>{data.email}</p>
+  </article>
+  <Footer />
+</Layout>
+
+<style>
+  body {
+    background-color: rgb(245, 245, 245);
+  }
+
+  article {
+    font-family: "Times New Roman", Times, serif;
+    border: 2px solid rgb(219, 212, 200);
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    background-color: rgba(219, 212, 200, 0.213);
+    margin: 5%;
+    max-width: 500px;
+  }
+
+  img {
+    width: 100%;
+    height: auto;
+  }
+
+  a {
+    text-decoration: none;
+    color: black;
+  }
+
+  article:hover {
+    background-color: rgba(219, 212, 200, 0.5);
+    transition: background-color 0.3s ease;
+  }
+
+  @media (min-width: 768px) {
+    article {
+      margin: 0 5% 0 5%;
+    }
+
+    img {
+      width: 100%;
+      height: auto;
+    }
+  }
+</style>

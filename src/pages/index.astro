@@ -22,11 +22,34 @@ console.log(data);
 
 <Layout>
   <Header />
-  <h1>Velkommen til de fire fedes fodboldklub!</h1>
+  <h1>Velkommen til de fire fedes fodboldfanklub!</h1>
   <p>Herunder kan du læse mere om klubbens medlemmer</p>
-  <div class="grid_1-1-1-1">
-    {data.map((data) => <Klubcards {data} />)}
-  </div>
+  <section class="grid_1-1-1-1">
+    <div>
+      {data.map((data) => data.membership == "Formand" && <Klubcards {data} />)}
+    </div>
+    <div>
+      {
+        data.map(
+          (data) => data.membership == "Næstformand" && <Klubcards {data} />
+        )
+      }
+    </div>
+    <div>
+      {
+        data.map(
+          (data) => data.membership == "Kasserer" && <Klubcards {data} />
+        )
+      }
+    </div>
+    <div>
+      {
+        data.map(
+          (data) => data.membership == "Seniormedlem" && <Klubcards {data} />
+        )
+      }
+    </div>
+  </section>
   <Footer />
 </Layout>
 

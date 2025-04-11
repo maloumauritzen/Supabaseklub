@@ -2,13 +2,15 @@
 const { data } = Astro.props;
 ---
 
-<article>
-  <h2>{data.membership}</h2>
-  <img src={data.image} alt={data.imagedescr} />
-  <h3>{data.name}</h3>
-  <p>{data.phone}</p>
-  <p>{data.email}</p>
-</article>
+<a href={"member/" + data.id}>
+  <article>
+    <h2>{data.membership}</h2>
+    <img src={"img/" + data.image} alt={data.imagedescr} />
+    <h3>{data.name}</h3>
+    <p>{data.phone}</p>
+    <p>{data.email}</p>
+  </article>
+</a>
 
 <style>
   article {
@@ -24,6 +26,16 @@ const { data } = Astro.props;
   img {
     width: 100%;
     height: auto;
+  }
+
+  a {
+    text-decoration: none;
+    color: black;
+  }
+
+  article:hover {
+    background-color: rgba(219, 212, 200, 0.5);
+    transition: background-color 0.3s ease;
   }
 
   @media (min-width: 768px) {
