@@ -1,11 +1,57 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
+import Layout from "../layouts/Layout.astro";
+import Klubcards from "../components/Klubcards.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+const curl =
+  "https://bzgcfrgsytewjqrhsigk.supabase.co/rest/v1/Products?select=*";
+
+const apikey =
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJ6Z2NmcmdzeXRld2pxcmhzaWdrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDQyNjgyNTUsImV4cCI6MjA1OTg0NDI1NX0.6-9nGRVUQBhhmYrnWFSNAc_istpSC-yWHMbqjhN1a5M";
+
+const options = {
+  headers: {
+    apikey: apikey,
+  },
+};
+
+const data = await fetch(curl, options).then((response) => response.json());
+console.log(data);
 ---
 
 <Layout>
-	<Welcome />
+  <Header />
+  <h1>Velkommen til de fire fedes fodboldklub!</h1>
+  <p>Herunder kan du læse mere om klubbens medlemmer</p>
+  <div class="grid_1-1-1-1">
+    {data.map((data) => <Klubcards {data} />)}
+  </div>
+  <Footer />
 </Layout>
+
+<style>
+  body {
+    background-color: rgb(245, 245, 245);
+  }
+
+  h1 {
+    text-align: center;
+    font-size: 3rem;
+    color: rgb(159, 245, 31);
+    margin-bottom: 0;
+  }
+  p {
+    text-align: center;
+    font-size: 1.5rem;
+    color: rgb(159, 245, 31);
+    font-style: italic;
+  }
+  @media (min-width: 768px) {
+    .grid_1-1-1-1 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 30px;
+    }
+  }
+</style>

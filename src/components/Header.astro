@@ -1,0 +1,38 @@
+<header>
+  <div class="navigation">
+    <nav>
+      <ul>
+        <li>Forside</li>
+        <li>Medlemmer</li>
+        <li>Om Os</li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<style>
+  header {
+    color: black;
+    font-weight: bold;
+    display: flex;
+    justify-content: flex-end; /* Skubber indholdet til højre */
+    font-size: 1rem;
+    margin: 2% 2% 0 0;
+  }
+
+  nav ul {
+    display: flex; /* Gør <li>-elementerne til en række */
+    list-style: none; /* Fjerner prikker */
+    gap: 20px; /* Lidt mellemrum mellem menupunkterne */
+    margin: 0;
+    padding: 0;
+  }
+
+  li {
+    cursor: pointer;
+  }
+
+  li:hover {
+    color: rgb(159, 245, 31);
+  }
+</style>

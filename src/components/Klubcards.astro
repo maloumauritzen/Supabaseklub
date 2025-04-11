@@ -1,0 +1,39 @@
+---
+const { data } = Astro.props;
+---
+
+<article>
+  <h2>{data.membership}</h2>
+  <img src={data.image} alt={data.imagedescr} />
+  <h3>{data.name}</h3>
+  <p>{data.phone}</p>
+  <p>{data.email}</p>
+</article>
+
+<style>
+  article {
+    font-family: "Times New Roman", Times, serif;
+    border: 2px solid rgb(219, 212, 200);
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    background-color: rgba(219, 212, 200, 0.213);
+    margin: 5%;
+  }
+
+  img {
+    width: 100%;
+    height: auto;
+  }
+
+  @media (min-width: 768px) {
+    article {
+      margin: 0 5% 0 5%;
+    }
+
+    img {
+      width: 100%;
+      height: auto;
+    }
+  }
+</style>
